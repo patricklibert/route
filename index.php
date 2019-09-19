@@ -1,28 +1,30 @@
 <?php
 session_start();
 require_once 'controller/route.php';
-require_once 'controller/users.php';
-require_once 'controller/load.php';
-require_once 'controller/profile.php';
 require_once 'controller/sql.php';
 require_once 'controller/login.php';
 require_once 'controller/logout.php';
-global $url;
-$GLOBALS['$url'] = "/var/www/ubuntu/route/view/";
+require_once 'view/view.php';
 
 $route = new Route();
 
 $route->add('/', function() {
-  $home = new load();
+    $view = new view('load');
 });
 
 $route->add('/users', function() {
-   $users = new users();
+    $sql = new sql();
+    $users = $sql->users();
+    $view = new view('users');
+    $view->assign('inhoud', $users);
 
 });
 
 $route->add('/users/.+', function($first) {
-    $profile = new profile($first);
+    $sql = new sql();
+    $row = $sql->user($first);
+    $view = new view('profile');
+    $view->assign('row', $row);
 
 });
 

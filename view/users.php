@@ -22,6 +22,7 @@ if((isset($_SESSION["loggedin"])) && ($_SESSION["loggedin"] == true)) {
 }
 
 echo "<br>PHP parsing is working<br>";
+
 foreach ($inhoud as $value) {
 
     echo "<a href='users/" . $value['first_name'] . "'>" . $value['first_name'] . "</a><a href='" . $value['github'] . "'> <i class=\"fab fa-github\"></i></a><br>";
